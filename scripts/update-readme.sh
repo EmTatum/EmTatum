@@ -1,20 +1,12 @@
-<<<<<<< HEAD
 #!/bin/bash
 set -euo pipefail
 
 README="${1:-README.md}"
-=======
-#!/usr/bin/env bash
-
-README="README.md"
->>>>>>> origin/main
 
 if [[ ! -f "$README" ]]; then
   echo "Error: $README not found" >&2
   exit 1
 fi
-<<<<<<< HEAD
-=======
 
 echo "README is present: $README"
 
@@ -32,4 +24,3 @@ else
   echo "Last updated: $DATE_STR" >> "$README"
   echo "Appended timestamp to $README"
 fi
->>>>>>> origin/main
