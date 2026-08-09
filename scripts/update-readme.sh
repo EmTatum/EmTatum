@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-README="README.md"
+README="${1:-README.md}"
 
 if [[ ! -f "$README" ]]; then
   echo "Error: $README not found" >&2
