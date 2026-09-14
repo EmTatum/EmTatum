@@ -19,12 +19,12 @@ cd "${TEST_DIR}"
 
 run_test() {
     local name="$1"
-    local command="$2"
-    local expected_status="$3"
+    local expected_status="$2"
+    shift 2
 
     echo "Running test: ${name}"
     set +e
-    eval "${command}" >/dev/null 2>&1
+    "$@" >/dev/null 2>&1
     local status=$?
     set -e
 
@@ -39,17 +39,17 @@ run_test() {
 
 # Test 1: No args, README.md exists
 touch README.md
-run_test "No args, README.md exists" "${SCRIPT}" 0
+run_test "No args, README.md exists" 0 "${SCRIPT}"
 
 # Test 2: No args, README.md missing
 rm README.md
-run_test "No args, README.md missing" "${SCRIPT}" 1
+run_test "No args, README.md missing" 1 "${SCRIPT}"
 
 # Test 3: Arg points to existing file
 touch custom_readme.txt
-run_test "Arg points to existing file" "${SCRIPT} custom_readme.txt" 0
+run_test "Arg points to existing file" 0 "${SCRIPT}" custom_readme.txt
 
 # Test 4: Arg points to missing file
-run_test "Arg points to missing file" "${SCRIPT} missing_readme.txt" 1
+run_test "Arg points to missing file" 1 "${SCRIPT}" missing_readme.txt
 
 echo "All tests passed successfully!"
