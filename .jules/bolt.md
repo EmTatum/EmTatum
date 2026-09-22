@@ -1,0 +1,3 @@
+## $(date +%Y-%m-%d) - Native Bash String Matching vs grep -q
+**Learning:** Replacing `grep -q` with native Bash string matching `[[ "$(< "$file")" == *"pattern"* ]]` is an anti-pattern for file reading. While it avoids forking a subshell, it reads the *entire file* into Bash's memory at once. `grep -q` is highly optimized, has a tiny footprint, and exits immediately upon finding the first match, making it superior for larger files.
+**Action:** Do not use `$(< "$file")` to search for strings in files unless the file size is guaranteed to be extremely small; stick to `grep -q` for safe and efficient file searching.
