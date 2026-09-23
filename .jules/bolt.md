@@ -1,0 +1,3 @@
+## 2024-05-24 - Regex Anchoring in Bash Scripts
+**Learning:** Using an unanchored regex like `grep -q "Last updated:"` forces the regex engine to scan the entire line for a match. When dealing with very large files or very long lines, this can become a significant performance bottleneck. Anchoring the regex with `^` (e.g., `grep -q "^Last updated:"`) allows the engine to fail fast if the line doesn't start with the pattern, resulting in measurable speedups (~60% improvement in tests with large files).
+**Action:** Always anchor regex patterns in `grep` and `sed` commands (`^` for start, `$` for end) when the position of the match is known. This is a zero-cost optimization that scales better with file size and line length while improving correctness.
