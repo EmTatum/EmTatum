@@ -13,7 +13,8 @@ echo "README is present: $README"
 # Update logic: Add or update a "Last updated" timestamp
 DATE_STR=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
 
-if grep -q "Last updated:" "$README"; then
+# ⚡ Bolt: Anchoring regex with ^ to fail-fast on large files and prevent false positives
+if grep -q "^Last updated:" "$README"; then
   # If it exists, replace the line
   # We use sed to replace the entire line containing "Last updated:"
   sed -i "s/^Last updated: .*/Last updated: $DATE_STR/" "$README"
